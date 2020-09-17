@@ -3,7 +3,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const { Client, Location } = require('whatsapp-web.js');
 
-const port = process.env.PORT || 4001;
+const port = 4001; //process.env.PORT || 4001;
 const index = require("./routes/index");
 
 const app = express();
