@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import socketIOClient from "socket.io-client";
 import QRCode from 'qrcode';
-import { formatRelative, subDays } from 'date-fns'
+import { formatRelative } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { Container, Box, BoxTitle, BoxText } from "../Home/HomeStyles";
 
 const ENDPOINT = "http://localhost:4001";
 
@@ -24,17 +25,17 @@ export default function QrCode () {
       });
   }, []);
 
-  const calcDate = (date) => new Date(date);
+  const calcDate = (date) => date ? new Date(date).toLocaleString() : new Date();
 
   return (
-    
-    <p>     
-      <h1>
-      {calcDate(times)}</h1>
+    <Container>
+    <h1>{`${formatRelative(calcDate(times), new Date(), { locale: ptBR })}`}</h1>
+    <p>
       {/* <time dateTime={times}>{times}</time> */}
-      {/* {formatRelative(new Date(times.split('Z')[0]), new Date(), { locale: ptBR })} */}
+      
       <img src={url}></img>
     </p>
+    </Container>
   );
 }
 
